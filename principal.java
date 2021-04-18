@@ -4,7 +4,7 @@ public class principal {
         
         calculadora ventana=new calculadora();
 
-        ventana.ventana();
+        ventana.ventanabasica();
 
 
     }
