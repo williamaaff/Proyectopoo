@@ -542,6 +542,18 @@ public class calculadora_trigonometria{
 
     formato.add(funcion1);//Añadir submenu a Formato
     formato.add(funcion2);//Añadir submenu a Formato
+    
+    ActionListener accioncalcbásico=new ActionListener(){//Función del item básico    
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+        ventana.setVisible (false); 
+        ventana.dispose();
+        calculadora_basica ventana=new calculadora_basica(); 
+        ventana.ventanabasica(); 
+      }
+
+    };
+    funcion2.addActionListener(accioncalcbásico);//a{adir función al item
 
     ventana.setJMenuBar(barramenu);
 
