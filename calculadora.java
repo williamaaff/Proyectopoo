@@ -2,12 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.script.*;
-public class calculadora {
+public class calculadora_basica {
 
   ScriptEngineManager calculo=new ScriptEngineManager();//Poder hacer los calculos
   ScriptEngine calculo1=calculo.getEngineByName("JavaScript");//operar "1+2" como int
 
   public void ventanabasica(){//Constructor
+
 
     JFrame ventana=new JFrame("Calculadora");//CARACTERISTICAS DE LA VENTNA Y TITULO
     ventana.setVisible(true);//Hacer visible la ventana
@@ -18,26 +19,30 @@ public class calculadora {
 
     JPanel panel=new JPanel();
     panel.setLayout(null);//Quitar el diseño por defecto del panel por defecto
-    // panel.setBackground(Color.white);//Configuracion de Color de panel
+    panel.setBackground(Color.white);//Configuracion de Color de panel
     ventana.getContentPane().add(panel);//Añadir panel a la ventana
 
     JLabel Titulo=new JLabel("Calculadora Basica");//Titulo del programa 
     Titulo.setSize(150,239);
     Titulo.setForeground(Color.black);//Color Letra   
-    Titulo.setBounds(10, 0, 300, 50);//Posicion del texto
+    Titulo.setBounds(10, 5, 300, 50);//Posicion del texto
     Titulo.setFont(new Font("Arial",Font.PLAIN,20));//Configuracion de texto
     panel.add(Titulo);
 
     //Pantalla ---------------------------------------------------------
 
     JTextArea pantalla =new JTextArea();
-    pantalla.setBounds(10, 45, 225, 50);
+    pantalla.setBounds(10, 45, 225, 20);
     pantalla.setEditable(false);
     panel.add(pantalla);
 
-    //Botones------------------------------------------------------------------------
+    JTextArea pantallaresultado =new JTextArea();//Aqui se ve el resultado final
+    pantallaresultado.setBounds(10, 60, 225, 35);
+    pantallaresultado.setFont(new Font("Arial",Font.PLAIN,35));
+    pantallaresultado.setEditable(false);
+    panel.add(pantallaresultado);
 
-    
+    //Botones------------------------------------------------------------------------
 
     JButton suma=new JButton("+");//Boton Suma
     suma.setBounds(190, 100, 50, 30);//Tamaño de boton
@@ -269,26 +274,122 @@ public class calculadora {
     };
     cero.addActionListener(accion0);
 
-    JButton igual=new JButton("=");
+    JButton coma=new JButton(".");
+    coma.setBounds(130, 250, 50, 30);//Tamaño de boton
+    coma.setFont(new Font("Arial",Font.PLAIN,25));
+    panel.add(coma);
+    ActionListener accioncoma=new ActionListener(){//Añadir 1 a la pantalla
+
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+
+        pantalla.append(".");
+
+      }
+
+    };
+    coma.addActionListener(accioncoma);
+
+    JButton parentesis=new JButton("(");
+    parentesis.setBounds(10, 300, 50, 30);//Tamaño de boton
+    parentesis.setFont(new Font("Arial",Font.PLAIN,25));
+    panel.add(parentesis);
+    ActionListener accionparentesis=new ActionListener(){//Añadir 1 a la pantalla
+
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+
+        pantalla.append("(");
+
+      }
+
+    };
+    parentesis.addActionListener(accionparentesis);
+
+    JButton parentesis1=new JButton(")");
+    parentesis1.setBounds(70, 300, 50, 30);//Tamaño de boton
+    parentesis1.setFont(new Font("Arial",Font.PLAIN,25));
+    panel.add(parentesis1);
+    ActionListener accionparentesis1=new ActionListener(){//Añadir 1 a la pantalla
+
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+
+        pantalla.append(")");
+
+      }
+
+    };
+    parentesis1.addActionListener(accionparentesis1);
+
+    JButton potencia=new JButton("+/-");
+    potencia.setBounds(130, 300, 50, 30);//Tamaño de boton
+    potencia.setFont(new Font("Arial",Font.PLAIN,13));
+    panel.add(potencia);
+    ActionListener accionpotencia=new ActionListener(){//Añadir 1 a la pantalla
+
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+
+        pantalla.append("-(");
+
+      }
+
+    };
+    potencia.addActionListener(accionpotencia);
+
+    JButton limpiarpantalla=new JButton("C");//Limpiar pantalla
+    limpiarpantalla.setBounds(10, 250, 52, 30);//Tamaño de boton
+    limpiarpantalla.setFont(new Font("Arial",Font.PLAIN,25));
+    panel.add(limpiarpantalla);
+    ActionListener limpiar=new ActionListener(){//Añadir 1 a la pantalla
+
+      @Override 
+      public void actionPerformed(ActionEvent ae){
+
+        pantalla.setText("");
+        pantallaresultado.setText("");
+
+      }
+
+    };
+    limpiarpantalla.addActionListener(limpiar);
+
+    JButton igual=new JButton("=");//Igual
     igual.setBounds(190, 300, 50, 30);//Tamaño de boton
     igual.setFont(new Font("Arial",Font.PLAIN,25));
     panel.add(igual);
-    ActionListener accionigual=new ActionListener(){//Resultado en la pantalla
+    ActionListener accionigual=new ActionListener(){//Sumatoria a la pantalla
       
       @Override 
       public void actionPerformed(ActionEvent ae){
         try {
-          String resultado=calculo1.eval(pantalla.getText()).toString(); //evaluar la operacion "1+1" como int 1+1
-          pantalla.setText(resultado);//poner resultado en pantalla
+          String resultado=calculo1.eval(pantalla.getText()).toString();
+          pantallaresultado.setText(resultado);
 
         } catch (Exception e) {
-          //TODO: handle exception
+          System.out.println("Error.");
         }
       }
 
     };
     igual.addActionListener(accionigual);
+    
+    JMenuBar barramenu=new JMenuBar(); //Nombre de la barra, Solamente se crea una vez
+    JMenu formato=new JMenu("Formato"); //Nombre del primer menu
+    JMenu contacto=new JMenu("Contacto"); //Nombre del segundo menu
+    JMenuItem  funcion1=new JMenuItem("Cientifico");
+    JMenuItem  funcion2=new JMenuItem("Basico");
  
-  }
+    barramenu.add(formato);//Añadir los menús a la barra
+    barramenu.add(contacto);//Añadir los menús a la barra
+
+    formato.add(funcion1);//Añadir submenu a Formato
+    formato.add(funcion2);//Añadir submenu a Formato
+
+    ventana.setJMenuBar(barramenu);//Poner menu en la ventana
+
+    }
+
 
 }
