@@ -377,15 +377,32 @@ public class calculadora_basica {
     
     JMenuBar barramenu=new JMenuBar(); //Nombre de la barra, Solamente se crea una vez
     JMenu formato=new JMenu("Formato"); //Nombre del primer menu
-    JMenu contacto=new JMenu("Contacto"); //Nombre del segundo menu
     JMenuItem  funcion1=new JMenuItem("Cientifico");
-    JMenuItem  funcion2=new JMenuItem("Basico");
- 
+    JMenuItem  funcion3=new JMenuItem("Basico");
+
+    JMenu ayuda=new JMenu("Ayuda");//Nombre del segundo menu
+
+    JMenu contacto=new JMenu("Contacto"); //Nombre del tercer menu
+    JMenu cl=new JMenu("Cristian Lopez");
+    JMenu wa=new JMenu("William Arango");
+    JMenuItem ad1=new JMenuItem("clopezbe@unal.edu.co");
+    JMenuItem ad2=new JMenuItem("warango@unal.edu.co");
+    contacto.add(cl);
+    contacto.addSeparator();
+    contacto.add(wa);
+    cl.add(ad1);
+    wa.add(ad2);
+    
+    
     barramenu.add(formato);//Añadir los menús a la barra
+    barramenu.add(ayuda);//Añadir los menús a la barra
     barramenu.add(contacto);//Añadir los menús a la barra
 
+    
     formato.add(funcion1);//Añadir submenu a Formato
-    formato.add(funcion2);//Añadir submenu a Formato
+    formato.addSeparator();
+    formato.add(funcion3);//Añadir submenu a Formato
+
     
      ActionListener accioncalcbásico=new ActionListener(){//Metodo para item cientifico  
       @Override 
